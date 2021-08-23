@@ -25,7 +25,7 @@ class Profile extends Component {
   componentDidMount() {
     const user = AuthenticationService.getCurrentUser();
 
-    axios.get(`/profile/${this.props.match.params.id}`).then( response => {
+    axios.get(`https://backendforproject.herokuapp.com/profile/${this.props.match.params.id}`).then( response => {
           this.setState({userIn: response.data});
       });
 

@@ -7,7 +7,7 @@ import axios from "axios";
 
 class AuthenticationService {
   signin = (username, password) => {
-      return axios.post("/api/auth/signin", {username, password})
+      return axios.post("https://backendforproject.herokuapp.com/api/auth/signin", {username, password})
         .then(response => {
           if (response.data.accessToken) {
             localStorage.setItem("user", JSON.stringify(response.data));
@@ -26,7 +26,7 @@ class AuthenticationService {
   }
 
   register = async(firstname, lastname, username, email, password) => {
-    return axios.post("/api/auth/signup", {
+    return axios.post("https://backendforproject.herokuapp.com/api/auth/signup", {
       firstname,
       lastname,
       username,
