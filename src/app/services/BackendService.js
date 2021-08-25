@@ -14,46 +14,60 @@ axios.interceptors.request.use( config => {
 
 class BackendService {
   async getUserBoard() {
-    return await axios.get("https://backendforproject.herokuapp.com/api/test/user");
+    return await axios.get("/api/test/user");
   }
 
 
   async getAdminBoard() {
-    return await axios.get("https://backendforproject.herokuapp.com/api/test/admin");
+    return await axios.get("/api/test/admin");
   }
 
   async getThemeList() {
-    return await axios.get("https://backendforproject.herokuapp.com/api/collection/theme");
+    return await axios.get("/api/collection/theme");
   }
   async addNewCollection(data) {
-    return await axios.post("https://backendforproject.herokuapp.com/api/collection/new",data);
+    return await axios.post("/api/collection/new",data);
   }
 
   async getCurrentUserCollections(id_theme) {
-    return await axios.get("https://backendforproject.herokuapp.com/api/collection/user");
+    return await axios.get("/api/collection/user");
   }
 
   async removeCollectionById(id){
-    return await axios.delete(`https://backendforproject.herokuapp.com/api/collection/delete/${id}`);
+    return await axios.delete(`/api/collection/delete/${id}`);
   }
 
   async getCollectionById(id){
-    return await axios.get(`https://backendforproject.herokuapp.com/api/collection/edit/${id}`);
+    return await axios.get(`/api/collection/edit/${id}`);
   }
 
   async editCollection(id,data) {
-    return await axios.post(`https://backendforproject.herokuapp.com/api/collection/sendEdit/${id}`,data);
+    return await axios.post(`/api/collection/sendEdit/${id}`,data);
   }
 
   async addNewItem(id,data) {
 
-    return await axios.post(`https://backendforproject.herokuapp.com/api/collection/${id}/newItem`,data);
+    return await axios.post(`/api/collection/${id}/newItem`,data);
   }
 
   async getItemByCollectionId(id) {
 
-    return await axios.get(`https://backendforproject.herokuapp.com/api/collection/${id}/getItems`);
+    return await axios.get(`/api/collection/${id}/getItems`);
   }
+
+  async getItemById(id) {
+
+    return await axios.get(`/api/collection/editItem/${id}`);
+  }
+
+  async editItem(id,data) {
+    return await axios.post(`/api/collection/editItem/${id}`,data);
+  }
+
+  async removeItemById(id){
+    return await axios.delete(`/api/collection/deleteItem/${id}`);
+  }
+
   // async removeUserById(id) {
   //   return await axios.delete(`/user/${id}`);
   // }

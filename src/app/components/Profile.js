@@ -14,7 +14,7 @@ class Profile extends Component {
 
   constructor(props) {
     super(props);
-      console.log(this.props);
+
     this.state = {user: undefined,
                   userIn: null,
                   collectionsList: []
@@ -25,7 +25,7 @@ class Profile extends Component {
   componentDidMount() {
     const user = AuthenticationService.getCurrentUser();
 
-    axios.get(`https://backendforproject.herokuapp.com/profile/${this.props.match.params.id}`).then( response => {
+    axios.get(`/profile/${this.props.match.params.id}`).then( response => {
           this.setState({userIn: response.data});
       });
 

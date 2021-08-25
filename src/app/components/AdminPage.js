@@ -36,7 +36,7 @@ class AdminPage extends Component {
   }
 
   removeUserById(id) {
-      axios.delete(`https://backendforproject.herokuapp.com/user/${id}`)
+      axios.delete(`/user/${id}`)
           .then( response => {
               const isNotId = user => user.id !== id;
               const updatedUsers = this.state.users.filter(isNotId);

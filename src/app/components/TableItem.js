@@ -3,17 +3,44 @@ import {Alert} from "reactstrap";
 import BackendService from "../services/BackendService";
 import AppNavbar from "./AppNavbar";
 
+import {Link} from "react-router-dom";
+
+
 class TableItem extends Component {
 
     constructor(props) {
         super(props);
 
         this.state = {
-            name:''
+            name:'',
+            items:[]
 
         };
-        this.handleChange = this.handleChange.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
+    }
+
+    componentDidMount() {
+        BackendService.getItemByCollectionId(this.props.match.params.id,{
+            name: this.state.name
+        })
+
+            .then(response => {
+                this.setState({
+                    items: response.data
+                })
+                console.log(response.data)
+            }).catch(err=>{
+            console.log(err);
+        });
+    }
+
+    removeById(id) {
+        BackendService.removeItemById(id)
+            .then( response => {
+                const isNotId = item => item.id !== id;
+                const updatedItems = this.state.items.filter(isNotId);
+                this.setState({ items: updatedItems });
+            });
     }
 
     handleSubmit(event) {
@@ -23,18 +50,39 @@ class TableItem extends Component {
         BackendService.getItemByCollectionId(this.props.match.params.id,{
             name: this.state.name
         })
+
             .then(response => {
-                console.log(response.data);
-                //this.props.history.push('/');
+                this.setState({
+                    items: response.data
+                })
+                console.log(response.data)
             }).catch(err=>{
             console.log(err);
         });
     }
 
-    handleChange(e) {
-        this.setState({ [e.target.name]: e.target.value });
-    }
 
+
+    tablerow(){
+
+        return this.state.items.map((item) =>
+            <tr>
+                <th scope="row">{item.id}</th>
+                <td><Link to={`/viewItem/${item.id}`}>{item.name}</Link></td>
+                <td></td>
+                <td>
+                    <div>
+                        <Link to={`/editCollection/${this.props.match.params.id}/editItems/${item.id}`}>
+                            <button type="button" className="btn btn-success">Edit item</button>
+                        </Link>
+
+                        <button type="button" className="btn btn-primary"
+                                   onClick={() => this.removeById(item.id)}>Delete</button>
+                    </div>
+                </td>
+            </tr>
+        );
+    }
 
     render() {
         return(
@@ -53,19 +101,10 @@ class TableItem extends Component {
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <th scope="row"></th>
-                        <td></td>
-                        <td></td>
-                        <td>
-                            <div>
-                                <button type="button" className="btn btn-info">Block</button>
-                                <button type="button" className="btn btn-danger" >Delete</button>
-                            </div>
-                        </td>
-                    </tr>
+                    {this.tablerow()}
                     </tbody>
                 </table>
+
             </div>
         )
     }
