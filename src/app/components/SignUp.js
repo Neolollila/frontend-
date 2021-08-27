@@ -96,10 +96,9 @@ class SignUp extends Component {
         },
         error => {
           console.log("Fail! Error = " + error.toString());
-          
           this.setState({
             successful: false,
-            message: error.toString()
+            message: error.response.data.message
           });
         }
       );  

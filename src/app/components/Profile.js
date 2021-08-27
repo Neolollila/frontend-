@@ -8,6 +8,7 @@ import AuthenticationService from '../services/AuthenticationService';
 import axios from "axios";
 import BackendService from "../services/BackendService";
 import CollectionCard from "../collection elements/card";
+import {withTranslation} from "react-i18next";
 
 
 class Profile extends Component {
@@ -25,7 +26,7 @@ class Profile extends Component {
   componentDidMount() {
     const user = AuthenticationService.getCurrentUser();
 
-    axios.get(`/profile/${this.props.match.params.id}`).then( response => {
+    BackendService.getUserInById(this.props.match.params.id).then( response => {
           this.setState({userIn: response.data});
       });
 
@@ -60,6 +61,7 @@ class Profile extends Component {
   render() {
     let userInfo = "";
     const user = this.state.user;
+    const { t } = this.props;
 
     // login
     if (user && user.accessToken) {
@@ -73,20 +75,20 @@ class Profile extends Component {
       userInfo = (
                 <div style={{marginTop:"20px"}}>
                   <Alert variant="info">
-                    <h2>User Info</h2>
+                    <h2>{t("User_Info")}</h2>
                     <ul>
-                      <li>Username: { this.state.userIn==null ? user.username : this.state.userIn.username}</li>
-                      <li>Authorities: { this.state.userIn==null ? roles : this.state.userIn.role}</li>
+                      <li>{t("Username")}: { this.state.userIn==null ? user.username : this.state.userIn.username}</li>
+                      <li>{t("Authorities")}: { this.state.userIn==null ? roles : this.state.userIn.role}</li>
                     </ul>
                   </Alert>
-                    <Link to="/createcollection"><Button type="submit" color="primary">Create new collection</Button></Link>
+                    <Link to="/createcollection"><Button type="submit" color="primary">{t("Create_new_collection")}</Button></Link>
                 </div>
               );
     } else { // not login
       userInfo = <div style={{marginTop:"20px"}}>
                     <Alert variant="primary">
-                      <h2>Profile Component</h2>
-                      <Button color="success"><Link to="/signin"><span style={{color:"white"}}>Login</span></Link></Button>
+                      <h2>{t("Profile_Component")}</h2>
+                      <Button color="success"><Link to="/signin"><span style={{color:"white"}}>{t("Login")}</span></Link></Button>
                     </Alert>
                   </div>
     }
@@ -110,4 +112,4 @@ class Profile extends Component {
   }
 }
 
-export default Profile;
+export default withTranslation() (Profile)

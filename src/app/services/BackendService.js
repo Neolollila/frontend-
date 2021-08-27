@@ -29,8 +29,16 @@ class BackendService {
     return await axios.post("/api/collection/new",data);
   }
 
-  async getCurrentUserCollections(id_theme) {
+  async createUserCollection(id,data) {
+    return await axios.post(`/api/collection/new/${id}`,data);
+  }
+
+  async getCurrentUserCollections() {
     return await axios.get("/api/collection/user");
+  }
+
+  async getUserCollections(id) {
+    return await axios.get(`/api/collection/user/${id}`);
   }
 
   async removeCollectionById(id){
@@ -83,9 +91,23 @@ class BackendService {
   async setActive(id){
     return await axios.post(`/api/addActive/${id}`);
   }
-  // async removeUserById(id) {
-  //   return await axios.delete(`/user/${id}`);
-  // }
+
+  async removeUserById(id){
+    return await axios.delete(`/user/${id}`);
+  }
+
+  async getUserInById(id) {
+
+    return await axios.get(`/profile/${id}`);
+  }
+
+  async getLastAddedItems() {
+    return await axios.get("/api/collection/home/lastAddedItems");
+  }
+
+  async getLargestCollections() {
+    return await axios.get("/api/collection/home/largestCollections");
+  }
 }
 
 export default new BackendService();

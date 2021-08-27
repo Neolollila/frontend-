@@ -7,6 +7,9 @@ import { withRouter } from 'react-router-dom';
 import AuthenticationService from '../services/AuthenticationService';
 
 import ThemeSwitch from '../style/ThemeSwitch';
+import LanguageSelect from "../multilanguage/languageSelect";
+import {withTranslation} from "react-i18next";
+
 
 
 class AppNavbar extends Component {
@@ -77,13 +80,14 @@ class AppNavbar extends Component {
 
 
   render() {
+    const { t } = this.props;
     return (<Navbar color="dark" dark expand="md" >
 
           <NavbarBrand tag={Link} to="/home">Mandrik.phys</NavbarBrand>
       <Nav className="mr-auto">
-        <NavLink href="/home">Home</NavLink>
+        <NavLink href="/home">{t("home")}</NavLink>
         {/*{this.state.showUser && <NavLink href="/createcollection">Create Collection</NavLink>}*/}
-        {this.state.showAdmin && <NavLink href="/admin">Admin</NavLink>}
+        {this.state.showAdmin && <NavLink href="/admin">{t("admin")}</NavLink>}
 
       </Nav>
       <NavbarToggler onClick={this.toggle}/>
@@ -93,25 +97,26 @@ class AppNavbar extends Component {
             <Nav className="ml-auto" navbar>
               <NavItem>
                   <NavbarText>
-                    Signed in as: <a href="/profiles/0">{this.state.username}</a>
+                    {t("Signed_in_as")} <a href="/profiles/0">{this.state.username}</a>
                   </NavbarText>
               </NavItem>
               <NavItem>
-                <NavLink href="#" onClick={this.signOut}>SignOut</NavLink>
+                <NavLink href="#" onClick={this.signOut}>{t("SignOut")}</NavLink>
               </NavItem>
             </Nav>                 
           ) : (
             <Nav className="ml-auto" navbar>
               <NavItem>
-                <NavLink href="/signin" className="float-right">Login</NavLink>
+                <NavLink href="/signin" className="float-right">{t("Login")}</NavLink>
               </NavItem>
               <NavItem>
-                <NavLink href="/signup" className="float-right">SignUp</NavLink>
+                <NavLink href="/signup" className="float-right">{t("SignUp")}</NavLink>
               </NavItem>
             </Nav>
           )
         }
         <ThemeSwitch/>
+        <LanguageSelect />
       </Collapse>
 
     </Navbar>
@@ -119,4 +124,4 @@ class AppNavbar extends Component {
   }
 }
 
-export default withRouter(AppNavbar);
+export default withTranslation()(AppNavbar)

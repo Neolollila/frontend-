@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import AppNavbar from "./AppNavbar";
 import {Alert, Form, FormGroup, Input, Label} from "reactstrap";
 import BackendService from "../services/BackendService";
+import {withTranslation} from "react-i18next";
 
 
 class EditItems extends Component{
@@ -59,23 +60,24 @@ class EditItems extends Component{
 
 
     render() {
+        const { t } = this.props;
         return(
             <div>
                 <AppNavbar/>
                 <div>
                     <div>
                         <Alert color="primary">
-                            Add new item!
+                            {t("Edit_item")}!
                         </Alert>
                         <Form onSubmit={this.handleSubmit}>
                             <FormGroup>
-                                <Label for="exampleName">Item name</Label>
+                                <Label for="exampleName">{t("Item_name")}</Label>
                                 <Input onChange={this.handleChange} value={this.state.name}
-                                       type="text" name="name" id="exampleName" placeholder="Enter item name" />
+                                       type="text" name="name" id="exampleName"  />
                             </FormGroup>
 
 
-                            <p><button type="submit" className="btn btn-primary">Save changes</button></p>
+                            <p><button type="submit" className="btn btn-primary">{t("Save_changes")}</button></p>
 
                         </Form>
 
@@ -88,4 +90,4 @@ class EditItems extends Component{
     }
 }
 
-export default EditItems;
+export default withTranslation() (EditItems)

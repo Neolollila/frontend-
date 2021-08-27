@@ -2,6 +2,7 @@ import React, {Component} from "react";
 import AppNavbar from "./AppNavbar";
 import BackendService from "../services/BackendService";
 import {Alert, Form, FormGroup, Input, Label, Toast, ToastBody, ToastHeader} from "reactstrap";
+import {withTranslation} from "react-i18next";
 
 class ItemPage extends Component {
 
@@ -92,6 +93,7 @@ class ItemPage extends Component {
     }
 
     render() {
+        const { t } = this.props;
         return(
             <div>
                 <AppNavbar/>
@@ -100,27 +102,27 @@ class ItemPage extends Component {
                         <div className="p-3 my-2 rounded bg-docs-transparent-grid">
                             <Toast>
                                 <ToastHeader>
-                                    Information about item:
+                                    {t("Information_about_item")}:
                                 </ToastHeader>
                                 <ToastBody>
-                                    Name:{this.state.item.name}
+                                    {t("Name")}:{this.state.item.name}
 
                                 </ToastBody>
-                                <button variant="dark" onClick={() => this.addLike(this.state.item.id)}>Like</button>
+                                <button variant="dark" onClick={() => this.addLike(this.state.item.id)}>{t("Like")}</button>
                                 <span>{this.state.likesAmount}</span>
                             </Toast>
                         </div>
                         <div className="p-3 my-2 rounded">
-                            <Label for="exampleName">Comments</Label>
+                            <Label for="exampleName">{t("Comments")}</Label>
                             {this.themesrow()}
                         </div>
                         <Form onSubmit={this.handleSubmit}>
                             <FormGroup>
-                                <Label for="exampleName">Comments</Label>
+                                <Label for="exampleName">{t("Comments")}</Label>
                                 <textarea class="form-control" onChange={this.handleChange} value={this.state.comment}
                                        name="comment" id="exampleComment" placeholder="Enter comment" />
                             </FormGroup>
-                            <p><button type="submit" className="btn btn-primary">Send</button></p>
+                            <p><button type="submit" className="btn btn-primary">{t("Send")}</button></p>
 
 
                         </Form>
@@ -135,4 +137,4 @@ class ItemPage extends Component {
 
 
 }
-export default ItemPage;
+export default withTranslation() (ItemPage)

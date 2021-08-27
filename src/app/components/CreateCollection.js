@@ -38,7 +38,7 @@ class CreateCollectionPage extends Component {
         return(
             <div>
                 <AppNavbar/>
-                <FormCollection themes={this.state.themes}/>
+                <FormCollection idUser={this.props.match.params.idUser} themes={this.state.themes}/>
             </div>
         )
     }

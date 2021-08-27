@@ -29,9 +29,7 @@ class Login extends Component {
   doLogin = async (event) => {
     event.preventDefault();
 
-    AuthenticationService
-        .signin(this.state.username, 
-                  this.state.password)
+    AuthenticationService.signin(this.state.username, this.state.password)
       .then(
         () => {
           this.props.history.push('/');

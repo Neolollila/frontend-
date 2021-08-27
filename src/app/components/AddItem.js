@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import AppNavbar from "./AppNavbar";
 import {Alert, Button, Form, FormGroup, Input, Label} from "reactstrap";
 import BackendService from "../services/BackendService";
+import {withTranslation} from "react-i18next";
 
 class AddItem extends Component {
     constructor(props) {
@@ -36,23 +37,24 @@ class AddItem extends Component {
 
 
     render() {
+        const { t } = this.props;
         return(
             <div>
                 <AppNavbar/>
                 <div>
                     <div>
                         <Alert color="primary">
-                            Add new item!
+                            {t("Add_new_item!")}
                         </Alert>
                         <Form onSubmit={this.handleSubmit}>
                             <FormGroup>
-                                <Label for="exampleName">Item name</Label>
+                                <Label for="exampleName">{t("Item_name")}</Label>
                                 <Input onChange={this.handleChange} value={this.state.name}
                                        type="text" name="name" id="exampleName" placeholder="Enter item name" />
                             </FormGroup>
 
 
-                            <p><button type="submit" className="btn btn-primary">Add Item</button></p>
+                            <p><button type="submit" className="btn btn-primary">{t("Add_Item")}</button></p>
                         </Form>
 
                     </div>
@@ -65,4 +67,4 @@ class AddItem extends Component {
 
 }
 
-export default AddItem;
+export default withTranslation() (AddItem)

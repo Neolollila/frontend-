@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button } from 'reactstrap';
+import {withTranslation} from "react-i18next";
 
 
 class ThemeSwitch extends Component {
@@ -48,16 +49,17 @@ class ThemeSwitch extends Component {
     }
 
     render() {
+        const { t } = this.props;
         return (
             <div>
 
                 <Button size="sm" color="primary" aria-pressed={this.state.active} onClick={this.toggle}>
-                    Night mode: {Boolean(this.state.active) ? 'on' : 'off'}
+                    {t("Night_mode")}: {Boolean(this.state.active) ? 'on' : 'off'}
                     <span aria-hidden="true">
                         {Boolean(this.state.active) ? 'on' : 'off'}
                     </span>
                 </Button>{' '}
-                <style media={Boolean(this.state.active) ? 'screen' : 'none'}>
+                <style media={Boolean(this.state.active) ? 'none' : 'screen'}>
                     {Boolean(this.state.active) ? this.css.trim() : this.css}
                 </style>
             </div>
@@ -65,4 +67,4 @@ class ThemeSwitch extends Component {
     }
 }
 
-export default ThemeSwitch;
+export default withTranslation() (ThemeSwitch)

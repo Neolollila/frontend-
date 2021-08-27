@@ -5,6 +5,7 @@ import { Alert } from "reactstrap";
 import BackendService from '../services/BackendService';
 import axios from "axios";
 import {Link} from "react-router-dom";
+import {withTranslation} from "react-i18next";
 
 
 
@@ -56,7 +57,7 @@ class AdminPage extends Component {
   }
 
   removeUserById(id) {
-      axios.delete(`/user/${id}`)
+      BackendService.removeUserById(id)
           .then( response => {
               const isNotId = user => user.id !== id;
               const updatedUsers = this.state.users.filter(isNotId);
@@ -85,6 +86,7 @@ class AdminPage extends Component {
     }
 
   render() {
+      const { t } = this.props;
     return (
       <div>
         <AppNavbar/>
@@ -92,12 +94,12 @@ class AdminPage extends Component {
           <table className="table">
             <thead color="primary-color" textWhite>
               <tr>
-                <th>id</th>
-                <th>Username</th>
-                <th>Email</th>
-                <th>Role</th>
-                  <th>Active</th>
-                <th>Actions</th>
+                <th>{t("id")}</th>
+                <th>{t("Username")}</th>
+                <th>{t("Email")}</th>
+                <th>{t("Role")}</th>
+                  <th>{t("Active")}</th>
+                <th>{t("Actions")}</th>
               </tr>
             </thead>
             <tbody>
@@ -127,4 +129,4 @@ class AdminPage extends Component {
 
 
 
-export default AdminPage;
+export default withTranslation() (AdminPage)

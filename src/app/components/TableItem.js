@@ -4,6 +4,7 @@ import BackendService from "../services/BackendService";
 import AppNavbar from "./AppNavbar";
 
 import {Link} from "react-router-dom";
+import {withTranslation} from "react-i18next";
 
 
 class TableItem extends Component {
@@ -65,6 +66,7 @@ class TableItem extends Component {
 
     tablerow(){
 
+
         return this.state.items.map((item) =>
             <tr>
                 <th scope="row">{item.id}</th>
@@ -85,19 +87,20 @@ class TableItem extends Component {
     }
 
     render() {
+        const { t } = this.props;
         return(
             <div>
                 <AppNavbar/>
                 <Alert color="primary">
-                    Item table:
+                    {t("Item_table")}:
                 </Alert>
                 <table className="table">
                     <thead>
                     <tr>
-                        <th>id</th>
-                        <th>Name Item</th>
-                        <th>Tag</th>
-                        <th>Actions</th>
+                        <th>{t("id")}</th>
+                        <th>{t("Name_Item")}</th>
+                        <th>{t("Tag")}</th>
+                        <th>{t("Actions")}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -110,4 +113,4 @@ class TableItem extends Component {
     }
 }
 
-export default TableItem;
+export default withTranslation() (TableItem)

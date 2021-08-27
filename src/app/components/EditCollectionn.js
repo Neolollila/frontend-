@@ -1,9 +1,10 @@
 import AppNavbar from './AppNavbar';
 import React, { Component } from 'react';
-import { Container } from 'reactstrap';
+import {Alert, Container} from 'reactstrap';
 import BackendService from '../services/BackendService';
 import axios from "axios";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
+import {withTranslation} from "react-i18next";
 
 
 class EditCollectionn extends Component {
@@ -82,34 +83,38 @@ class EditCollectionn extends Component {
     }
 
     render() {
+        const { t } = this.props;
         return (
             <div>
                 <AppNavbar/>
 
                 <Form onSubmit={this.handleSubmit}>
+                    <Alert color="primary">
+                        {t("Edit_collection")}
+                    </Alert>
                     <FormGroup>
-                        <Label for="exampleName">Collection name</Label>
+                        <Label for="exampleName">{t("Collection_name")}</Label>
                         <Input onChange={this.handleChange} value={this.state.name}
                                type="text" name="name" id="exampleName" placeholder="Enter collection name" />
                     </FormGroup>
                     <div className="form-group">
-                        <Label for="exampleTheme">Select collection theme</Label>
+                        <Label for="exampleTheme">{t("Select_collection_theme")}</Label>
                         <select className="form-control" onChange={this.handleChange} value={this.state.theme} name="theme" id="theme">
                             {this.themesrow()}
                         </select>
 
                     </div>
                     <FormGroup>
-                        <Label for="description">Information about collection</Label>
+                        <Label for="description">{t("Information_about_collection")}</Label>
                         <Input onChange={this.handleChange} value={this.state.description}
                                type="textarea" name="description" id="description" />
                     </FormGroup>
                     <FormGroup>
-                        <Label for="image">Image</Label>
+                        <Label for="image">{t("Image")}</Label>
                         <Input type="file" name="image" id="image" />
 
                     </FormGroup>
-                    <Button color="primary" >Save</Button>
+                    <Button color="primary" >{t("Save")}</Button>
                 </Form>
 
             </div>
@@ -119,4 +124,4 @@ class EditCollectionn extends Component {
 
 
 
-export default EditCollectionn;
+export default withTranslation() (EditCollectionn)

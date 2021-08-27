@@ -1,9 +1,5 @@
 import axios from "axios";
 
-/**
- * @Copyright by https://loizenai.com
- *        youtube loizenai
- */
 
 class AuthenticationService {
   signin = (username, password) => {
