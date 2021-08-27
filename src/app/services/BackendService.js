@@ -68,6 +68,21 @@ class BackendService {
     return await axios.delete(`/api/collection/deleteItem/${id}`);
   }
 
+  async addComment(data){
+    return await axios.post("/api/collection/addComment",data);
+  }
+
+  async addLike(id){
+    return await axios.post(`/api/collection/addLike/${id}`);
+  }
+
+  async addAdmin(id){
+    return await axios.post(`/api/addAdmin/${id}`);
+  }
+
+  async setActive(id){
+    return await axios.post(`/api/addActive/${id}`);
+  }
   // async removeUserById(id) {
   //   return await axios.delete(`/user/${id}`);
   // }

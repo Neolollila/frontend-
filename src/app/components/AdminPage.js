@@ -4,6 +4,7 @@ import { Container } from 'reactstrap';
 import { Alert } from "reactstrap";
 import BackendService from '../services/BackendService';
 import axios from "axios";
+import {Link} from "react-router-dom";
 
 
 
@@ -22,6 +23,7 @@ class AdminPage extends Component {
   componentDidMount() {
     BackendService.getAdminBoard()
       .then( response => {
+          console.log(response.data);
         this.setState({
           users: response.data
         })
@@ -33,6 +35,24 @@ class AdminPage extends Component {
       });
 
 
+  }
+
+    setActive(id) {
+        BackendService.setActive(id)
+            .then( response => {
+                this.setState({
+                    users: response.data
+                })
+            });
+    }
+
+  setAdmin(id) {
+      BackendService.addAdmin(id)
+          .then( response => {
+              this.setState({
+                  users: response.data
+              })
+          });
   }
 
   removeUserById(id) {
@@ -49,12 +69,15 @@ class AdminPage extends Component {
         return this.state.users.map((user) =>
             <tr>
                 <th scope="row">{user.id}</th>
-                <td>{user.username}</td>
+                <td><Link to={`/profile/${user.id}`}>{user.username}</Link></td>
                 <td>{user.email}</td>
+                <td>{user.roles[0].name}</td>
+                <td>{user.active ? 'true' : 'false'}</td>
                 <td>
                     <div>
-                        <button type="button" className="btn btn-info">Block</button>
+                        <button type="button" className="btn btn-info" onClick={() => this.setActive(user.id)}>Block</button>
                         <button type="button" className="btn btn-danger" onClick={() => this.removeUserById(user.id)}>Delete</button>
+                        <button type="button" className="btn btn-success" onClick={() => this.setAdmin(user.id)}>Admin</button>
                     </div>
                 </td>
             </tr>
@@ -73,6 +96,7 @@ class AdminPage extends Component {
                 <th>Username</th>
                 <th>Email</th>
                 <th>Role</th>
+                  <th>Active</th>
                 <th>Actions</th>
               </tr>
             </thead>

@@ -38,7 +38,7 @@ class Login extends Component {
         },
         error => {
           console.log("Login fail: error = { " + error.toString() + " }");
-          this.setState({error: "Can not signin successfully ! Please check username/password again"});
+          this.setState({error: "Can not signin successfully ! Please check username/password again or you was blocked"});
         }
     );
   }

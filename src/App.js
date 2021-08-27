@@ -24,6 +24,7 @@ class App extends Component {
           <Route path='/' exact={true} component={Home}/>
           <Route path='/home' exact={true} component={Home}/>
           <Route path='/profiles/:id' exact={true} component={Profile}/>
+          <Route path='/profile/:idUser' exact={true} component={Profile}/>
           <Route path='/createcollection' exact={true} component={CreateCollection}/>
           <Route path='/admin' exact={true} component={AdminPage}/>
           <Route path='/signin' exact={true} component={Login}/>
