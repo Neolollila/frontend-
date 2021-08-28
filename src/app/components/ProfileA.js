@@ -7,6 +7,7 @@ import { Alert } from "react-bootstrap"
 import AuthenticationService from '../services/AuthenticationService';
 import BackendService from "../services/BackendService";
 import CollectionCard from "../collection elements/card";
+import {withTranslation} from "react-i18next";
 
 
 class ProfileAd extends Component {
@@ -60,20 +61,20 @@ class ProfileAd extends Component {
     render() {
 
 
-
+        const { t } = this.props;
         return (
             <div>
                 <AppNavbar/>
                 <Container fluid>
                     <div style={{marginTop:"20px"}}>
                         <Alert variant="info">
-                            <h2>User Info</h2>
+                            <h2>{t("User_Info")}</h2>
                             <ul>
-                                <li>Username: {this.state.userIn.username}</li>
+                                <li>{t("Username")}: {this.state.userIn.username}</li>
 
                             </ul>
                         </Alert>
-                        <Link to={`/createcollection/${this.props.match.params.idUser}`} ><Button type="submit" color="primary">Create new collection</Button></Link>
+                        <Link to={`/createcollection/${this.props.match.params.idUser}`} ><Button type="submit" color="primary">{t("Create_new_collection")}</Button></Link>
                     </div>
                     <div className="album py-5 bg-light">
                         <div className="container">
@@ -89,4 +90,4 @@ class ProfileAd extends Component {
     }
 }
 
-export default ProfileAd;
+export default withTranslation() (ProfileAd)

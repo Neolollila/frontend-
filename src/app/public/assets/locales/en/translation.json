@@ -43,7 +43,14 @@
   "Edit_collection": "Edit collection",
   "Information_about_item": "Information about item",
   "Like": "Like",
+  "Password": "Password",
+  "Please_check_the_inputs_again": "Please check the inputs again",
+  "Create": "Create",
+  "Last_Name": "Last Name",
+  "First_Name": "First Name",
+  "Register_User": "Register User",
   "Comments": "Comments",
+  "Sign_In": "Sign In",
   "Send": "Send"
 
 

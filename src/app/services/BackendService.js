@@ -108,6 +108,10 @@ class BackendService {
   async getLargestCollections() {
     return await axios.get("/api/collection/home/largestCollections");
   }
+
+  async getItemLike(id) {
+    return await axios.get(`/api/collection/getLike/${id}`);
+  }
 }
 
 export default new BackendService();

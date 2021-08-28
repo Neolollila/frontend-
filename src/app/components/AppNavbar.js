@@ -64,7 +64,6 @@ class AppNavbar extends Component {
 
   signOut = () => {
     AuthenticationService.signOut();
-    this.props.history.push('/home');
     window.location.reload();
   }
 

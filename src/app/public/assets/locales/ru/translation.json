@@ -10,7 +10,7 @@
   "Collections_with_the_largest": "Коллекции с наибольшим количеством предметов:",
   "Night_mode": "Тема",
   "id": "id",
-  "Username": "Имя",
+  "Username": "Логин",
   "Email": "Почта",
   "Role": "Роль",
   "Active": "Активность",
@@ -41,6 +41,13 @@
   "Information_about_item": "Информация об объекте",
   "Like": "Лайк",
   "Comments": "Комментарии",
+  "Password": "Пароль",
+  "Please_check_the_inputs_again": "Пожалуйста, проверьте веденные данные ещё раз",
+  "Create": "Создать",
+  "Last_Name": "Фамилия",
+  "First_Name": "Имя",
+  "Register_User": "Регистрация пользователя",
+  "Sign_In": "Войти",
   "Send": "Отправить"
 
 

@@ -13,6 +13,7 @@ import AddItem from "./app/components/AddItem";
 import TableItem from "./app/components/TableItem";
 import EditItems from "./app/components/EditItems";
 import ItemPage from "./app/components/ItemPage";
+import ViewTableItem from "./app/components/ViewTableItem";
 
 
 
@@ -34,6 +35,7 @@ class App extends Component {
           <Route path='/editCollection/:id' exact={true} component={EditCollectionn}/>
           <Route path='/editCollection/:id/addItem' exact={true} component={AddItem}/>
           <Route path='/editCollection/:id/tableItem' exact={true} component={TableItem}/>
+          <Route path='/editCollection/:id/viewTableItem' exact={true} component={ViewTableItem}/>
           <Route path='/editCollection/:id/editItems/:idItem' exact={true} component={EditItems}/>
           <Route path='/viewItem/:idItem' exact={true} component={ItemPage}/>
 

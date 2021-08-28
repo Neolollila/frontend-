@@ -6,6 +6,7 @@ import AppNavbar from "./AppNavbar";
 import BackendService from "../services/BackendService";
 import FormCollection from "../collection elements/Form";
 import FormEditCollection from "../collection elements/FormEdit";
+import {withTranslation} from "react-i18next";
 
 class CreateCollectionPage extends Component {
 
@@ -35,6 +36,7 @@ class CreateCollectionPage extends Component {
 
 
     render() {
+        const { t } = this.props;
         return(
             <div>
                 <AppNavbar/>
@@ -44,5 +46,5 @@ class CreateCollectionPage extends Component {
     }
 }
 
-export default CreateCollectionPage;
+export default withTranslation() (CreateCollectionPage)
 

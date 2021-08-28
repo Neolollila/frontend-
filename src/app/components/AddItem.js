@@ -50,7 +50,7 @@ class AddItem extends Component {
                             <FormGroup>
                                 <Label for="exampleName">{t("Item_name")}</Label>
                                 <Input onChange={this.handleChange} value={this.state.name}
-                                       type="text" name="name" id="exampleName" placeholder="Enter item name" />
+                                       type="text" name="name" id="exampleName" />
                             </FormGroup>
 
 

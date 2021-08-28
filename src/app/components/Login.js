@@ -7,6 +7,7 @@ import AuthenticationService from "../services/AuthenticationService";
 import avatar from '../../avatar.png';
 
 import '../../App.css';
+import {withTranslation} from "react-i18next";
 
 class Login extends Component {
 
@@ -42,6 +43,7 @@ class Login extends Component {
   }
 
   render() {
+    const { t } = this.props;
     return ( 
       <div>
         <AppNavbar/>
@@ -54,30 +56,28 @@ class Login extends Component {
             </div>
             <Form  onSubmit={this.doLogin}>
               <FormGroup>
-                <Label for="username"><strong>Username</strong></Label>
+                <Label for="username"><strong>{t("Username")}</strong></Label>
                 <Input autoFocus 
                   type="text"
                   name="username" id="username"
                   value={this.state.username}
-                  placeholder="Enter Username"
                   autoComplete="username"
                   onChange={this.changeHandler}
                 />
               </FormGroup>
 
               <FormGroup>
-                <Label for="password"><strong>Password</strong></Label>
+                <Label for="password"><strong>{t("Password")}</strong></Label>
                 <Input type="password" 
                   name="password" id="password"
                   value={this.state.password}
-                  placeholder="Enter Password"
                   autoComplete="password"
                   onChange={this.changeHandler}
                 />
               </FormGroup>
 
               <Button type="submit" variant="primary" size="lg" block>
-                Sign In
+                {t("Sign_In")}
               </Button>
               {
                 this.state.error && (
@@ -94,4 +94,4 @@ class Login extends Component {
   }
 }
 
-export default Login;
+export default withTranslation() (Login)

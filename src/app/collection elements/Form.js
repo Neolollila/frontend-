@@ -4,6 +4,7 @@ import {Link} from "react-router-dom";
 import axios from "axios";
 import BackendService from "../services/BackendService";
 import {withTranslation} from "react-i18next";
+import UploadImages from "../dragonDrop/uploadImage";
 
 
 function Themesrow(props){
@@ -32,10 +33,15 @@ class FormCollection extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
+        let linkImg = '';
+        let imageFile = document.getElementById("imageFile");
+        if(imageFile.files.length > 0){
+            linkImg = document.getElementById("imageCollection").src;
+        }
         if( typeof this.props.idUser === 'undefined') {
             BackendService.addNewCollection({
                 name: this.state.name,
-                image: '',//this.fileInput,
+                image: linkImg,
                 theme: this.state.themes,
                 description: this.state.description
             })
@@ -47,11 +53,12 @@ class FormCollection extends Component {
         else {
             BackendService.createUserCollection(this.props.idUser,{
                 name: this.state.name,
-                image: '',//this.fileInput,
+                image: linkImg,//this.fileInput,
                 theme: this.state.themes,
                 description: this.state.description
             });
         }
+
     }
 
     handleChange(e) {
@@ -61,33 +68,42 @@ class FormCollection extends Component {
     render() {
         const { t } = this.props;
         return (
-            <Form onSubmit={this.handleSubmit}>
-                <FormGroup>
-                    <Label for="exampleName">{t("Collection_name")}</Label>
-                    <Input onChange={this.handleChange} value={this.state.name}
-                           type="text" name="name" id="exampleName" placeholder="Enter collection name" />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="exampleTheme">{t("Select_collection_theme")}</Label>
-                    <Input onChange={this.handleChange} value={this.value}
-                           type="select" name="themes" id="exampleTheme">
-                        <Themesrow themes={this.props.themes}/>
+            <div className="container">
+                <div className="row">
+                    <div className="col-sm">
+                        <Form onSubmit={this.handleSubmit}>
+                            <FormGroup>
+                                <Label for="exampleName">{t("Collection_name")}</Label>
+                                <Input onChange={this.handleChange} value={this.state.name}
+                                       type="text" name="name" id="exampleName"  />
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="exampleTheme">{t("Select_collection_theme")}</Label>
+                                <Input onChange={this.handleChange} value={this.value}
+                                       type="select" name="themes" id="exampleTheme">
+                                    <Themesrow themes={this.props.themes}/>
 
-                    </Input>
-                </FormGroup>
-                <FormGroup>
-                    <Label for="description">{t("Information_about_collection")}</Label>
-                    <Input onChange={this.handleChange} value={this.state.description}
-                           type="textarea" name="description" id="description" />
-                </FormGroup>
-                <FormGroup>
-                    <Label for="image">Image</Label>
-                    <Input type="file" name="image" id="image" />
+                                </Input>
+                            </FormGroup>
+                            <FormGroup>
+                                <Label for="description">{t("Information_about_collection")}</Label>
+                                <Input onChange={this.handleChange} value={this.state.description}
+                                       type="textarea" name="description" id="description" />
+                            </FormGroup>
+                            <FormGroup>
 
-                </FormGroup>
-                <Button color="primary" >{t("Save")}</Button>
-            </Form>
-        );
+
+                            </FormGroup>
+                            <Button color="primary" >{t("Save")}</Button>
+                        </Form>
+                    </div>
+                    <div className="col-sm">
+                        <Label for="image">{t("Image")}</Label>
+                        <UploadImages/>
+                    </div>
+                </div>
+            </div>
+    );
     }
 
 }

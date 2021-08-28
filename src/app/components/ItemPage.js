@@ -12,6 +12,7 @@ class ItemPage extends Component {
         this.state={
             item: '',
             comment: '',
+            likesAmount: 0,
             comments: []
         }
 
@@ -25,6 +26,12 @@ class ItemPage extends Component {
             () => this.getItemById(),
             5000
         );
+        BackendService.getItemLike(this.props.match.params.idItem)
+            .then( response => {
+                this.setState({
+                    likesAmount: response.data
+                });
+            });
     }
 
     componentWillUnmount() {
@@ -108,8 +115,8 @@ class ItemPage extends Component {
                                     {t("Name")}:{this.state.item.name}
 
                                 </ToastBody>
-                                <button variant="dark" onClick={() => this.addLike(this.state.item.id)}>{t("Like")}</button>
-                                <span>{this.state.likesAmount}</span>
+                                <button variant="dark" className="btn btn-outline-primary" onClick={() => this.addLike(this.state.item.id)}>{this.state.likesAmount} {t("Like")}</button>
+
                             </Toast>
                         </div>
                         <div className="p-3 my-2 rounded">

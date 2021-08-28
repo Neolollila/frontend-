@@ -5,6 +5,7 @@ import BackendService from '../services/BackendService';
 import axios from "axios";
 import { Button, Form, FormGroup, Label, Input, FormText } from 'reactstrap';
 import {withTranslation} from "react-i18next";
+import UploadImages from "../dragonDrop/uploadImage";
 
 
 class EditCollectionn extends Component {
@@ -17,6 +18,7 @@ class EditCollectionn extends Component {
             collection:'',
             name: '',
             description: '',
+            image:'',
             theme: 1,
         };
 
@@ -45,6 +47,7 @@ class EditCollectionn extends Component {
                     name: response.data.name,
                     description: response.data.description,
                     theme: response.data.theme.id,
+                    image: response.data.image,
                 });
             } , error => {
                 console.log(error);
@@ -57,9 +60,18 @@ class EditCollectionn extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
+        let linkImg = '';
+        let imageFile = document.getElementById("imageFile");
+        if(imageFile.files.length > 0){
+            linkImg = document.getElementById("imageCollection").src;
+        }
+        else {
+            document.getElementById("previu").src = "";
+        }
+
         BackendService.editCollection(this.props.match.params.id, {
             name: this.state.name,
-            image: '',//this.fileInput,
+            image: linkImg,//this.fileInput,
             theme: this.state.theme,
             description: this.state.description
         })
@@ -87,8 +99,10 @@ class EditCollectionn extends Component {
         return (
             <div>
                 <AppNavbar/>
-
-                <Form onSubmit={this.handleSubmit}>
+                <div className="container">
+                    <div className="row">
+                        <div className="col-sm">
+                            <Form onSubmit={this.handleSubmit}>
                     <Alert color="primary">
                         {t("Edit_collection")}
                     </Alert>
@@ -109,14 +123,16 @@ class EditCollectionn extends Component {
                         <Input onChange={this.handleChange} value={this.state.description}
                                type="textarea" name="description" id="description" />
                     </FormGroup>
-                    <FormGroup>
-                        <Label for="image">{t("Image")}</Label>
-                        <Input type="file" name="image" id="image" />
-
-                    </FormGroup>
                     <Button color="primary" >{t("Save")}</Button>
                 </Form>
-
+                        </div>
+                        <div className="col-sm">
+                            <Label for="image">{t("Image")}</Label>
+                            <UploadImages/>
+                            <img style={{maxWidth: "50%" , maxHeight: "50%" }} id="previu" src={this.state.image}/>
+                        </div>
+                    </div>
+                </div>
             </div>
         );
     }

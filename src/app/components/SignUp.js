@@ -5,6 +5,7 @@ import { Button, Form, FormGroup, Input, Label, Row, Col } from "reactstrap";
 import { Alert } from "react-bootstrap"
 
 import Authentication from '../services/AuthenticationService'
+import {withTranslation} from "react-i18next";
 
 const validEmailRegex = RegExp(/^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()[\]\.,;:\s@\"]+\.)+[^<>()[\]\.,;:\s@\"]{2,})$/i);
 
@@ -106,8 +107,10 @@ class SignUp extends Component {
   }
 
   render() {
-    const title = <h2>Register User</h2>;
+    const { t } = this.props;
+    const title = <h2>{t("Register_User")}</h2>;
     const errors = this.state.errors;
+
 
     let alert = "";
 
@@ -136,10 +139,9 @@ class SignUp extends Component {
           {title}
             <Form onSubmit={this.signUp}>
               <FormGroup controlId="forFirstname">
-                <Label for="firstname">First Name</Label>
+                <Label for="firstname">{t("First_Name")}</Label>
                 <Input
-                  type="text" 
-                  placeholder="Enter First Name"
+                  type="text"
                   name="firstname" id="firstname"
                   value={this.state.firstname}
                   autoComplete="firstname"
@@ -155,10 +157,9 @@ class SignUp extends Component {
               </FormGroup>
 
               <FormGroup controlId="forLastname">
-                <Label for="lastname">Last Name</Label>
+                <Label for="lastname">{t("Last_Name")}</Label>
                 <Input
-                  type="text" 
-                  placeholder="Enter Last Name"
+                  type="text"
                   name="lastname" id="lastname"
                   value={this.state.lastname}
                   autoComplete="lastname"
@@ -174,10 +175,9 @@ class SignUp extends Component {
               </FormGroup>
 
               <FormGroup controlId="forUsername">
-                <Label for="username">Username</Label>
+                <Label for="username">{t("Username")}</Label>
                 <Input
-                  type="text" 
-                  placeholder="Enter UserName"
+                  type="text"
                   name="username" id="username"
                   value={this.state.username}
                   autoComplete="username"
@@ -193,10 +193,9 @@ class SignUp extends Component {
               </FormGroup>
 
               <FormGroup controlId="formEmail">
-                <Label for="email">Email</Label>
+                <Label for="email">{t("Email")}</Label>
                 <Input required
-                  type="text" 
-                  placeholder="Enter Email"
+                  type="text"
                   name="email" id="email"
                   value={this.state.email}
                   autoComplete="email"
@@ -212,10 +211,9 @@ class SignUp extends Component {
               </FormGroup>
 
               <FormGroup controlId="formPassword">
-                <Label for="password">Password</Label>
+                <Label for="password">{t("Password")}</Label>
                 <Input required 
-                  type="password" 
-                  placeholder="Enter Password"
+                  type="password"
                   name="password" id="password"
                   value={this.state.password}
                   autoComplete="password"
@@ -231,12 +229,12 @@ class SignUp extends Component {
               </FormGroup>
 
               <Button variant="primary" type="submit">
-                Create
+                {t("Create")}
               </Button>
               {
                 !this.state.validForm && (
                   <Alert key="validForm" variant="danger">
-                    Please check the inputs again!
+                    {t("Please_check_the_inputs_again")}!
                   </Alert>
                 )
               }
@@ -250,4 +248,4 @@ class SignUp extends Component {
   }
 }
 
-export default SignUp;
+export default withTranslation()  (SignUp)
