@@ -23,7 +23,7 @@ const UploadImages = () => {
         <div>
             <div>
                 <input id="imageFile" type="file" onChange= {(e)=> setImage(e.target.files[0])}></input>
-                <button onClick={uploadImage}>Upload</button>
+                <button onClick={uploadImage}>Preview image</button>
             </div>
             <div>
                 <img style={{maxWidth: "50%" , maxHeight: "50%" }} id="imageCollection" src={url}/>

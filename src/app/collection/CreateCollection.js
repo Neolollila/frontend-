@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import AppNavbar from "./AppNavbar";
+import AppNavbar from "../collection elements/AppNavbar";
 
 
 import BackendService from "../services/BackendService";

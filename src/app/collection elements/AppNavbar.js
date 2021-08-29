@@ -85,7 +85,7 @@ class AppNavbar extends Component {
           <NavbarBrand tag={Link} to="/home">Mandrik.phys</NavbarBrand>
       <Nav className="mr-auto">
         <NavLink href="/home">{t("home")}</NavLink>
-        {/*{this.state.showUser && <NavLink href="/createcollection">Create Collection</NavLink>}*/}
+
         {this.state.showAdmin && <NavLink href="/admin">{t("admin")}</NavLink>}
 
       </Nav>
@@ -96,7 +96,7 @@ class AppNavbar extends Component {
             <Nav className="ml-auto" navbar>
               <NavItem>
                   <NavbarText>
-                    {t("Signed_in_as")} <a href="/profiles/0">{this.state.username}</a>
+                    {t("Signed_in_as")} <a href="/profiles">{this.state.username}</a>
                   </NavbarText>
               </NavItem>
               <NavItem>

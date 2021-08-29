@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Alert} from "reactstrap";
 import BackendService from "../services/BackendService";
-import AppNavbar from "./AppNavbar";
+import AppNavbar from "../collection elements/AppNavbar";
 
 import {Link} from "react-router-dom";
 import {withTranslation} from "react-i18next";
@@ -17,14 +17,13 @@ class ViewTableItem extends Component {
             items:[]
 
         };
-        this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
         BackendService.getItemByCollectionId(this.props.match.params.id,{
             name: this.state.name
         })
-
             .then(response => {
                 this.setState({
                     items: response.data
@@ -37,23 +36,23 @@ class ViewTableItem extends Component {
 
 
 
-    handleSubmit(event) {
-        event.preventDefault();
-
-
-        BackendService.getItemByCollectionId(this.props.match.params.id,{
-            name: this.state.name
-        })
-
-            .then(response => {
-                this.setState({
-                    items: response.data
-                })
-                console.log(response.data)
-            }).catch(err=>{
-            console.log(err);
-        });
-    }
+    // handleSubmit(event) {
+    //     event.preventDefault();
+    //
+    //
+    //     BackendService.getItemByCollectionId(this.props.match.params.id,{
+    //         name: this.state.name
+    //     })
+    //
+    //         .then(response => {
+    //             this.setState({
+    //                 items: response.data
+    //             })
+    //             console.log(response.data)
+    //         }).catch(err=>{
+    //         console.log(err);
+    //     });
+    // }
 
 
 

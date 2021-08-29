@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AppNavbar from './AppNavbar';
+import AppNavbar from '../collection elements/AppNavbar';
 import { Container } from 'reactstrap';
 import { Form, Alert, FormGroup, Input, Label, Row, Col } from "reactstrap";
 import {Button} from 'react-bootstrap';

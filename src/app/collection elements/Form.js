@@ -51,7 +51,7 @@ class FormCollection extends Component {
                 });
         }
         else {
-            BackendService.createUserCollection(this.props.idUser,{
+            BackendService.createforUserCollection(this.props.idUser,{
                 name: this.state.name,
                 image: linkImg,//this.fileInput,
                 theme: this.state.themes,
@@ -75,7 +75,7 @@ class FormCollection extends Component {
                             <FormGroup>
                                 <Label for="exampleName">{t("Collection_name")}</Label>
                                 <Input onChange={this.handleChange} value={this.state.name}
-                                       type="text" name="name" id="exampleName"  />
+                                       type="text" name="name" id="exampleName" required  />
                             </FormGroup>
                             <FormGroup>
                                 <Label for="exampleTheme">{t("Select_collection_theme")}</Label>
@@ -88,7 +88,7 @@ class FormCollection extends Component {
                             <FormGroup>
                                 <Label for="description">{t("Information_about_collection")}</Label>
                                 <Input onChange={this.handleChange} value={this.state.description}
-                                       type="textarea" name="description" id="description" />
+                                       type="textarea" name="description" id="description" required />
                             </FormGroup>
                             <FormGroup>
 

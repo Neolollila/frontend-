@@ -19,8 +19,6 @@ class ThemeSwitch extends Component {
     }
 
     componentDidMount() {
-
-        //console.log(this.store.getItem('ThemeSwitch'));
         if (this.store) {
             this.setState({
                 active: this.store.getItem('ThemeSwitch')  || false
@@ -43,9 +41,6 @@ class ThemeSwitch extends Component {
         this.setState({
             active: !this.isActive(),
         });
-        //if (this.store) {
-            //this.store.setItem('ThemeSwitch', this.state.active);
-        //}
     }
 
     render() {
@@ -55,7 +50,7 @@ class ThemeSwitch extends Component {
             <div>
 
                 <Button size="sm" color="primary" aria-pressed={this.state.active} onClick={this.toggle}>
-                    {t("Night_mode")}: {Boolean(this.state.active) ? 'on' : 'off'}
+                    {t("Night_mode")}:
                     <span aria-hidden="true">
                         {this.state.active ? 'on' : 'off'}
                     </span>

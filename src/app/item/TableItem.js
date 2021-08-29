@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {Alert} from "reactstrap";
 import BackendService from "../services/BackendService";
-import AppNavbar from "./AppNavbar";
+import AppNavbar from "../collection elements/AppNavbar";
 
 import {Link} from "react-router-dom";
 import {withTranslation} from "react-i18next";
@@ -17,7 +17,7 @@ class TableItem extends Component {
             items:[]
 
         };
-        this.handleSubmit = this.handleSubmit.bind(this);
+        // this.handleSubmit = this.handleSubmit.bind(this);
     }
 
     componentDidMount() {
@@ -44,23 +44,23 @@ class TableItem extends Component {
             });
     }
 
-    handleSubmit(event) {
-        event.preventDefault();
-
-
-        BackendService.getItemByCollectionId(this.props.match.params.id,{
-            name: this.state.name
-        })
-
-            .then(response => {
-                this.setState({
-                    items: response.data
-                })
-                console.log(response.data)
-            }).catch(err=>{
-            console.log(err);
-        });
-    }
+    // handleSubmit(event) {
+    //     event.preventDefault();
+    //
+    //
+    //     BackendService.getItemByCollectionId(this.props.match.params.id,{
+    //         name: this.state.name
+    //     })
+    //
+    //         .then(response => {
+    //             this.setState({
+    //                 items: response.data
+    //             })
+    //             console.log(response.data)
+    //         }).catch(err=>{
+    //         console.log(err);
+    //     });
+    // }
 
 
 
@@ -71,7 +71,6 @@ class TableItem extends Component {
             <tr>
                 <th scope="row">{item.id}</th>
                 <td><Link to={`/viewItem/${item.id}`}>{item.name}</Link></td>
-                <td></td>
                 <td>
                     <div>
                         <Link to={`/editCollection/${this.props.match.params.id}/editItems/${item.id}`}>
@@ -99,7 +98,6 @@ class TableItem extends Component {
                     <tr>
                         <th>{t("id")}</th>
                         <th>{t("Name_Item")}</th>
-                        <th>{t("Tag")}</th>
                         <th>{t("Actions")}</th>
                     </tr>
                     </thead>

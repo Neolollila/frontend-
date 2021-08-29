@@ -43,5 +43,10 @@
     transform: rotate(360deg);
   }
 }
-
+.MuiButton-label{
+  color: #fff;
+}
+.navbar-expand-md .navbar-collapse{
+  justify-content: flex-end;
+}
 

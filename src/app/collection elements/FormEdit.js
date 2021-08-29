@@ -41,10 +41,10 @@ class FormEditCollection extends Component {
             theme: this.state.themes,
             description: this.state.description
         })
-        .then(response => {
-            //console.log('successfully created the collection');id_theme
-            //this.props.history.push('/');
-        });
+            .then(response => {
+                //console.log('successfully created the collection');id_theme
+                //this.props.history.push('/');
+            });
     }
 
     handleChange(e) {

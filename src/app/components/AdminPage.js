@@ -1,4 +1,4 @@
-import AppNavbar from './AppNavbar';
+import AppNavbar from '../collection elements/AppNavbar';
 import React, { Component } from 'react';
 import { Container } from 'reactstrap';
 import { Alert } from "reactstrap";
@@ -24,7 +24,6 @@ class AdminPage extends Component {
   componentDidMount() {
     BackendService.getAdminBoard()
       .then( response => {
-          console.log(response.data);
         this.setState({
           users: response.data
         })
@@ -87,6 +86,7 @@ class AdminPage extends Component {
 
   render() {
       const { t } = this.props;
+      console.log(this.state.content);
     return (
       <div>
         <AppNavbar/>
@@ -106,21 +106,6 @@ class AdminPage extends Component {
             {this.tablerow()}
             </tbody>
           </table>
-          {
-            this.state.content ? (
-              <div style={{marginTop: "20px"}}>
-                <Alert variant="info">
-                  <h2>{this.state.content}</h2>
-                </Alert>
-              </div>
-            ) : (
-              <div style={{marginTop: "20px"}}>
-                <Alert variant="danger">
-                  {this.state.error}
-                </Alert>
-              </div>
-            )
-          }
         </Container>
       </div>
     );

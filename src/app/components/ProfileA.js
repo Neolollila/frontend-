@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AppNavbar from './AppNavbar';
+import AppNavbar from '../collection elements/AppNavbar';
 import { Link } from 'react-router-dom';
 import { Button, Container } from 'reactstrap';
 import { Alert } from "react-bootstrap"
@@ -26,16 +26,13 @@ class ProfileAd extends Component {
 
 
         BackendService.getUserInById(this.props.match.params.idUser).then( response => {
-            console.log(response.data);
             this.setState({userIn: response.data});
         });
 
 
 
         BackendService.getUserCollections(this.props.match.params.idUser).then( response => {
-            //console.log(response.data);
             this.setState({collectionsList: response.data});
-            console.log(response.data);
         });
     }
 

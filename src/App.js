@@ -7,13 +7,13 @@ import ProfileAd from './app/components/ProfileA';
 import SignUp from './app/components/SignUp';
 import AdminPage from './app/components/AdminPage';
 import Login from './app/components/Login';
-import CreateCollection from "./app/components/CreateCollection";
-import EditCollectionn from './app/components/EditCollectionn';
-import AddItem from "./app/components/AddItem";
-import TableItem from "./app/components/TableItem";
-import EditItems from "./app/components/EditItems";
-import ItemPage from "./app/components/ItemPage";
-import ViewTableItem from "./app/components/ViewTableItem";
+import CreateCollection from "./app/collection/CreateCollection";
+import EditCollectionn from './app/collection/EditCollectionn';
+import AddItem from "./app/item/AddItem";
+import TableItem from "./app/item/TableItem";
+import EditItems from "./app/item/EditItems";
+import ItemPage from "./app/item/ItemPage";
+import ViewTableItem from "./app/item/ViewTableItem";
 
 
 
@@ -25,7 +25,7 @@ class App extends Component {
         <Switch>
           <Route path='/' exact={true} component={Home}/>
           <Route path='/home' exact={true} component={Home}/>
-          <Route path='/profiles/:id' exact={true} component={Profile}/>
+          <Route path='/profiles' exact={true} component={Profile}/>
           <Route path='/profile/:idUser' exact={true} component={ProfileAd}/>
           <Route path='/createcollection' exact={true} component={CreateCollection}/>
           <Route path='/createcollection/:idUser' exact={true} component={CreateCollection}/>

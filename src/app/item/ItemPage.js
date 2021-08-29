@@ -1,5 +1,5 @@
 import React, {Component} from "react";
-import AppNavbar from "./AppNavbar";
+import AppNavbar from "../collection elements/AppNavbar";
 import BackendService from "../services/BackendService";
 import {Alert, Form, FormGroup, Input, Label, Toast, ToastBody, ToastHeader} from "reactstrap";
 import {withTranslation} from "react-i18next";
@@ -104,40 +104,37 @@ class ItemPage extends Component {
         return(
             <div>
                 <AppNavbar/>
-                <div>
-                    <div>
-                        <div className="p-3 my-2 rounded bg-docs-transparent-grid">
-                            <Toast>
-                                <ToastHeader>
-                                    {t("Information_about_item")}:
-                                </ToastHeader>
-                                <ToastBody>
-                                    {t("Name")}:{this.state.item.name}
-
-                                </ToastBody>
-                                <button variant="dark" className="btn btn-outline-primary" onClick={() => this.addLike(this.state.item.id)}>{this.state.likesAmount} {t("Like")}</button>
-
-                            </Toast>
+                <main>
+                    <div className="container">
+                        <div className="row g-5">
+                            <div className="col-md-12 col-lg-12">
+                                <div className="p-3 my-2 rounded bg-docs-transparent-grid">
+                                    <Toast>
+                                        <ToastHeader>
+                                            {t("Information_about_item")}:
+                                        </ToastHeader>
+                                        <ToastBody>
+                                            {t("Name")}:{this.state.item.name}
+                                        </ToastBody>
+                                        <button variant="dark" className="btn btn-outline-primary" onClick={() => this.addLike(this.state.item.id)}>{this.state.likesAmount} {t("Like")}</button>
+                                    </Toast>
+                                </div>
+                                <div className="p-3 my-2 rounded">
+                                    <Label for="exampleName">{t("Comments")}</Label>
+                                    {this.themesrow()}
+                                </div>
+                                <Form onSubmit={this.handleSubmit}>
+                                    <FormGroup>
+                                        <Label for="exampleName">{t("Comments")}</Label>
+                                        <textarea class="form-control" onChange={this.handleChange} value={this.state.comment}
+                                               name="comment" id="exampleComment"  />
+                                    </FormGroup>
+                                    <p><button type="submit" className="btn btn-primary">{t("Send")}</button></p>
+                                </Form>
+                            </div>
                         </div>
-                        <div className="p-3 my-2 rounded">
-                            <Label for="exampleName">{t("Comments")}</Label>
-                            {this.themesrow()}
-                        </div>
-                        <Form onSubmit={this.handleSubmit}>
-                            <FormGroup>
-                                <Label for="exampleName">{t("Comments")}</Label>
-                                <textarea class="form-control" onChange={this.handleChange} value={this.state.comment}
-                                       name="comment" id="exampleComment" placeholder="Enter comment" />
-                            </FormGroup>
-                            <p><button type="submit" className="btn btn-primary">{t("Send")}</button></p>
-
-
-                        </Form>
-
                     </div>
-
-
-                </div>
+                </main>
             </div>
         )
     }

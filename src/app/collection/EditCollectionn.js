@@ -1,4 +1,4 @@
-import AppNavbar from './AppNavbar';
+import AppNavbar from '../collection elements/AppNavbar';
 import React, { Component } from 'react';
 import {Alert, Container} from 'reactstrap';
 import BackendService from '../services/BackendService';
@@ -41,7 +41,6 @@ class EditCollectionn extends Component {
 
         BackendService.getCollectionById(this.props.match.params.id)
             .then( response => {
-                console.log(response.data);
                 this.setState({
                     collection: response.data,
                     name: response.data.name,
@@ -60,7 +59,7 @@ class EditCollectionn extends Component {
     handleSubmit(event) {
         event.preventDefault();
 
-        let linkImg = '';
+        let linkImg = this.state.image;
         let imageFile = document.getElementById("imageFile");
         if(imageFile.files.length > 0){
             linkImg = document.getElementById("imageCollection").src;
@@ -77,14 +76,13 @@ class EditCollectionn extends Component {
         })
             .then(response => {
                 console.log('successfully created the collection');
-                this.props.history.push('/');
+                this.props.history.push('/profiles');
                 })
             .catch(err=>{
         });
     }
 
     handleChange(e) {
-        console.log(e.target.name,e.target.value);
         this.setState({ [e.target.name]: e.target.value });
     }
 
@@ -109,7 +107,7 @@ class EditCollectionn extends Component {
                     <FormGroup>
                         <Label for="exampleName">{t("Collection_name")}</Label>
                         <Input onChange={this.handleChange} value={this.state.name}
-                               type="text" name="name" id="exampleName" placeholder="Enter collection name" />
+                               type="text" name="name" id="exampleName" required placeholder="Enter collection name" />
                     </FormGroup>
                     <div className="form-group">
                         <Label for="exampleTheme">{t("Select_collection_theme")}</Label>
@@ -121,7 +119,7 @@ class EditCollectionn extends Component {
                     <FormGroup>
                         <Label for="description">{t("Information_about_collection")}</Label>
                         <Input onChange={this.handleChange} value={this.state.description}
-                               type="textarea" name="description" id="description" />
+                               type="textarea" name="description" id="description"  required/>
                     </FormGroup>
                     <Button color="primary" >{t("Save")}</Button>
                 </Form>

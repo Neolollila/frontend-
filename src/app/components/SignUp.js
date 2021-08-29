@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import AppNavbar from './AppNavbar';
+import AppNavbar from '../collection elements/AppNavbar';
 import { Container } from 'reactstrap';
 import { Button, Form, FormGroup, Input, Label, Row, Col } from "reactstrap";
 import { Alert } from "react-bootstrap"
@@ -140,8 +140,8 @@ class SignUp extends Component {
             <Form onSubmit={this.signUp}>
               <FormGroup controlId="forFirstname">
                 <Label for="firstname">{t("First_Name")}</Label>
-                <Input
-                  type="text"
+                <Input required
+                       type="text"
                   name="firstname" id="firstname"
                   value={this.state.firstname}
                   autoComplete="firstname"
@@ -158,8 +158,8 @@ class SignUp extends Component {
 
               <FormGroup controlId="forLastname">
                 <Label for="lastname">{t("Last_Name")}</Label>
-                <Input
-                  type="text"
+                <Input  required
+                        type="text"
                   name="lastname" id="lastname"
                   value={this.state.lastname}
                   autoComplete="lastname"
@@ -176,8 +176,8 @@ class SignUp extends Component {
 
               <FormGroup controlId="forUsername">
                 <Label for="username">{t("Username")}</Label>
-                <Input
-                  type="text"
+                <Input required
+                       type="text"
                   name="username" id="username"
                   value={this.state.username}
                   autoComplete="username"
