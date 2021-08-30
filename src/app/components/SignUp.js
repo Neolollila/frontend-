@@ -93,7 +93,9 @@ class SignUp extends Component {
           this.setState({
             message: response.data.message,
             successful: true
+
           });
+          this.props.history.push('/signin');
         },
         error => {
           console.log("Fail! Error = " + error.toString());

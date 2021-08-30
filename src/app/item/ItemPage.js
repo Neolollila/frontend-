@@ -13,7 +13,8 @@ class ItemPage extends Component {
             item: '',
             comment: '',
             likesAmount: 0,
-            comments: []
+            comments: [],
+            fielditems: []
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -44,7 +45,8 @@ class ItemPage extends Component {
             .then( response => {
                     this.setState({
                         item: response.data,
-                        comments: response.data.comments
+                        comments: response.data.comments,
+                        fielditems: response.data.fielditems
                     });
                 }, error => {
                     console.log(error);
@@ -53,6 +55,7 @@ class ItemPage extends Component {
                     });
                 }
             )
+        console.log(this.state.fielditems);
     }
 
     handleSubmit(event) {
@@ -79,6 +82,12 @@ class ItemPage extends Component {
                     {comment.text}
                 </ToastBody>
             </Toast>
+        );
+    }
+
+    fielditem(){
+        return this.state.fielditems.map((fielditem) =>
+            <p>{fielditem.name}: {fielditem.value} </p>
         );
     }
 
@@ -115,6 +124,8 @@ class ItemPage extends Component {
                                         </ToastHeader>
                                         <ToastBody>
                                             {t("Name")}:{this.state.item.name}
+                                            <p></p>
+                                            {this.fielditem()}
                                         </ToastBody>
                                         <button variant="dark" className="btn btn-outline-primary" onClick={() => this.addLike(this.state.item.id)}>{this.state.likesAmount} {t("Like")}</button>
                                     </Toast>

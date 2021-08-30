@@ -12,6 +12,8 @@ class EditItems extends Component{
 
         this.state={
             name: '',
+            fieldItems: [],
+            types: []
         }
 
         this.handleChange = this.handleChange.bind(this);
@@ -22,8 +24,10 @@ class EditItems extends Component{
         BackendService.getItemById(this.props.match.params.idItem)
             .then( response => {
                 this.setState({
-                    name: response.data.name
+                    name: response.data.name,
+                    fieldItems: response.data.fielditems
                 });
+
             }, error => {
                     console.log(error);
                     this.setState({
@@ -31,6 +35,18 @@ class EditItems extends Component{
                     });
                 }
             )
+        BackendService.getTypeList()
+            .then( response => {
+                this.setState({
+                    types: response.data
+                })
+            } , error => {
+                console.log(error);
+                this.setState({
+                    error: error.toString()
+                });
+            });
+
     }
 
     handleSubmit(event) {
@@ -38,6 +54,7 @@ class EditItems extends Component{
 
         BackendService.editItem(this.props.match.params.idItem, {
             name: this.state.name,
+            fieldItems: this.state.fieldItems
         })
             .then(response => {
                 this.props.history.push(`/editCollection/${this.props.match.params.id}/tableItem`);
@@ -49,6 +66,104 @@ class EditItems extends Component{
         this.setState({ [e.target.name]: e.target.value });
     }
 
+    handleText = i => e => {
+
+        let fieldItems = [...this.state.fieldItems]
+        fieldItems[i][e.target.name] = e.target.value
+        this.setState({
+            fieldItems
+        });
+    }
+
+    handleIdType = i => e => {
+        let fieldItems = [...this.state.fieldItems]
+        fieldItems[i]["idType"] = e.target.value
+        this.setState({
+            fieldItems
+        });
+    }
+
+    handleDelete = i => e => {
+        e.preventDefault()
+        this.removeById(this.state.fieldItems[i].id);
+        let fieldItems = [
+            ...this.state.fieldItems.slice(0, i),
+            ...this.state.fieldItems.slice(i + 1)
+        ]
+        this.setState({
+            fieldItems
+        })
+    }
+
+    addQuestion = e => {
+        e.preventDefault()
+        let fieldItemsArr = this.state.fieldItems; //push({ name: "", value: "",idType : 1 })
+        fieldItemsArr.push({ name: "", value: "",idType : 1 });
+
+        this.setState({
+            fieldItems: fieldItemsArr
+        })
+    }
+
+    inp() {
+        return (
+            <div>
+                <div >
+                    {this.state.fieldItems.map((fieldItem, index) => (
+                        <div className="row" key={index}>
+                            <div className="form-group col-md-5">
+                                 <input
+                                     type="text"
+                                     name="name"
+                                     required
+                                     className="form-control"
+                                     placeholder="name"
+                                     onChange={this.handleText(index)}
+                                     value={fieldItem.name}
+                                 />
+                            </div>
+                            <div className="form-group col-md-5">
+                                <input
+                                    type="text"
+                                    name="value"
+                                    required
+                                    className="form-control"
+                                    placeholder="value"
+                                    onChange={this.handleText(index)}
+                                    value={fieldItem.value}
+                                />
+                            </div>
+                            <div className="form-group col-md-2">
+                                <button className="btn btn-danger"
+                                    onClick={this.handleDelete(index)}>X</button>
+                            </div>
+                            <div className="form-group">
+                                    <select style={{visibility: 'hidden'}} className="form-control" onChange={this.handleIdType(index)} value={fieldItem.idType} name="idType">
+                                        {this.typeslist()}
+                                    </select>
+
+                            </div>
+
+          </div>
+
+                    ))}
+                    <button style={{visibility: 'hidden'}} onClick={this.addQuestion} className="btn btn-success">Add New Field</button>
+                </div>
+            </div>
+
+        );
+    }
+    typeslist(){
+        return this.state.types.map((type) =>
+            <option key={type.id} value={type.id} >{type.name}</option>
+        );
+    }
+
+    removeById(id) {
+        BackendService.removeFieldItemById(id)
+            .then( response => {
+            });
+    }
     render() {
         const { t } = this.props;
         return(
@@ -69,6 +184,7 @@ class EditItems extends Component{
                                     </FormGroup>
                                     <p><button type="submit" className="btn btn-primary">{t("Save_changes")}</button></p>
                                 </Form>
+                                {this.inp()}
                             </div>
                         </div>
                     </div>
